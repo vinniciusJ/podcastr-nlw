@@ -23,10 +23,10 @@ export const Player = () => {
                 </div>
 
                 <div className={styles.buttons}>
-                    <button title="Embaralhar">
-                        <img src="/shuffle.svg" alt="Embaralhar"/>
+                    <button title="Aleatório">
+                        <img src="/shuffle.svg" alt="Aleatório"/>
                     </button>
-                    <button title="Tocar anterio">
+                    <button title="Tocar anterior">
                         <img src="/play-previous.svg" alt="Tocar anterior"/>
                     </button>
                     <button className={styles.playButton} title="Tocar">
