@@ -3,7 +3,14 @@
     height: calc(100vh - 6.5rem);
     width: calc(100vw - 26.5rem);
     overflow-y: scroll;
+    
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none; 
 
+    &::-webkit-scrollbar {
+        display: none;
+    }
+    
     h2{
         margin-top: 3rem;
         margin-bottom: 1.5rem;
