@@ -6,6 +6,7 @@ import { usePlayer } from '../../contexts/PlayerContext'
 
 import Link from 'next/link'
 import Image from 'next/image'
+import Head from 'next/head'
 import ptBR from 'date-fns/locale/pt-BR'
 import styles from './episode.module.scss'
 
@@ -26,6 +27,9 @@ const Episode = ({ episode } : { episode: Episode } ) => {
 
     return (
         <div className={styles.episode}>
+            <Head>
+                <title>{episode?.title ?? " "}</title>
+            </Head>
             <div className={styles.thumbnailContainer}>
                 <Link href="/">
                     <button title="Voltar à pagina anterior">

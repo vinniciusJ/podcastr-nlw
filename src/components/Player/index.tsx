@@ -23,7 +23,8 @@ export const Player = () => {
         isLooping, 
         toggleLoop,
         isShuflling, 
-        toggleShuflle 
+        toggleShuflle,
+        clearPlayerState
     } = usePlayer()
 
     const [ progress, setProgress ] = useState<number>(0)
@@ -35,6 +36,19 @@ export const Player = () => {
         audioRef.current.currentTime = 0
 
         audioRef.current.addEventListener('timeupdate', () => setProgress(Math.floor(audioRef.current.currentTime)))
+    }
+
+    const handleSliderChange = (amount: number) => {
+        audioRef.current.currentTime = amount
+
+        setProgress(amount)
+    }
+
+    const handleEpisodeEnd = () => {
+        if(hasNext)
+            playNext()
+        else
+            clearPlayerState()
     }
 
     useEffect(() => {
@@ -78,6 +92,7 @@ export const Player = () => {
                                 handleStyle={{ borderColor: '#04d361', borderWidth: 4 }}
                                 max={episode?.duration ?? 0}
                                 value={progress}
+                                onChange={handleSliderChange}
                             />
                         ) : (
                             <div className={styles.emptySlider}/>
@@ -121,6 +136,7 @@ export const Player = () => {
                     ref={audioRef} 
                     src={episode.url} 
                     loop={isLooping}
+                    onEnded={handleEpisodeEnd}
                     onLoadedMetadata={setUpProgressListener}
                     onPlay={() => setPlayingState(true)}
                     onPause={() => setPlayingState(false)}
