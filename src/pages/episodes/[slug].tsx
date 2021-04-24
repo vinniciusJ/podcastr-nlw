@@ -1,8 +1,8 @@
-import { useRouter } from 'next/router'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { api } from '../../services/api'
 import { format, parseISO } from 'date-fns'
 import { convertDurationToTimeString } from '../../utils'
+import { usePlayer } from '../../contexts/PlayerContext'
 
 import Link from 'next/link'
 import Image from 'next/image'
@@ -22,7 +22,7 @@ type Episode = {
 }
 
 const Episode = ({ episode } : { episode: Episode } ) => {
-    const router = useRouter()
+   const { play } = usePlayer()
 
     return (
         <div className={styles.episode}>
@@ -38,7 +38,7 @@ const Episode = ({ episode } : { episode: Episode } ) => {
                     src={episode.thumbnail}
                     objectFit="cover"
                 />
-                 <button title="Reproduzir episódio">
+                 <button onClick={() => play(episode)} title="Reproduzir episódio">
                     <img src="/play.svg" alt="Reproduzir episódio"/>
                 </button>
             </div>
